@@ -12,6 +12,7 @@ class Calculator extends PureComponent {
       numero2: 0,
       operador: '',
       display: '0',
+      primerNumero: false,
       segundoNumero: false,
       igual: false,
     }
@@ -36,16 +37,19 @@ class Calculator extends PureComponent {
             igual: false,
             display: numero,
             numero1: parseInt(numero, 10),
+            primerNumero: true,
           })
         } else if (numero1 === 0) {
           this.setState({
             display: numero,
             numero1: parseInt(numero, 10),
+            primerNumero: true,
           })
         } else {
           this.setState({
             display: display + numero,
             numero1: parseInt(display + numero, 10),
+            primerNumero: true,
           })
         }
       } else {
@@ -63,14 +67,12 @@ class Calculator extends PureComponent {
         this.setState({
           display: numero,
           numero2: parseInt(numero, 10),
-          // eslint-disable-next-line react/no-unused-state
           segundoNumero: true,
         })
       } else {
         this.setState({
           display: display + numero,
           numero2: parseInt(display + numero, 10),
-          // eslint-disable-next-line react/no-unused-state
           segundoNumero: true,
         })
       }
@@ -91,6 +93,7 @@ class Calculator extends PureComponent {
     const { numero1 } = this.state
     const { numero2 } = this.state
     const { segundoNumero } = this.state
+    const { primerNumero } = this.state
 
     if (igual === true) {
       this.setState({
@@ -98,9 +101,9 @@ class Calculator extends PureComponent {
       })
     }
 
-    if (numero1 === 0) {
+    if (numero1 === 0 && primerNumero === true) {
       this.setState({
-        operador: '',
+        operador: operando,
       })
     } else if (operador === '') {
       if (operando !== '/') {
