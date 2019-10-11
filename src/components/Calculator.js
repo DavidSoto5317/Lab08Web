@@ -12,6 +12,7 @@ class Calculator extends PureComponent {
       numero2: 0,
       operador: '',
       display: '0',
+      segundoNumero: false,
       igual: false,
     }
   }
@@ -62,11 +63,15 @@ class Calculator extends PureComponent {
         this.setState({
           display: numero,
           numero2: parseInt(numero, 10),
+          // eslint-disable-next-line react/no-unused-state
+          segundoNumero: true,
         })
       } else {
         this.setState({
           display: display + numero,
           numero2: parseInt(display + numero, 10),
+          // eslint-disable-next-line react/no-unused-state
+          segundoNumero: true,
         })
       }
     } else {
@@ -85,6 +90,7 @@ class Calculator extends PureComponent {
     const { igual } = this.state
     const { numero1 } = this.state
     const { numero2 } = this.state
+    const { segundoNumero } = this.state
 
     if (igual === true) {
       this.setState({
@@ -110,6 +116,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -117,6 +124,7 @@ class Calculator extends PureComponent {
             numero1: parseInt(numero1 + numero2, 10),
             numero2: 0,
             operador: operando,
+            segundoNumero: false,
           })
         }
       } else if (operador === '-') {
@@ -126,6 +134,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -133,15 +142,25 @@ class Calculator extends PureComponent {
             numero1: parseInt(numero1 - numero2, 10),
             numero2: 0,
             operador: operando,
+            segundoNumero: false,
           })
         }
       } else if (operador === 'x') {
-        if (numero2 === 0) {
+        if (numero2 === 0 && segundoNumero === true) {
+          this.setState({
+            display: (parseInt(numero1 * numero2, 10)).toString(),
+            numero1: parseInt(numero1 * numero2, 10),
+            numero2: 0,
+            operador: operando,
+            segundoNumero: false,
+          })
+        } else if (numero2 === 0) {
           this.setState({
             display: (parseInt(numero1, 10)).toString(),
             numero1: parseInt(numero1, 10),
             numero2: 0,
             operador: operando,
+            segundoNumero: false,
           })
         } else if ((parseInt(numero1 * numero2, 10)) > 999999999) {
           this.setState({
@@ -149,6 +168,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -156,6 +176,7 @@ class Calculator extends PureComponent {
             numero1: parseInt(numero1 * numero2, 10),
             numero2: 0,
             operador: operando,
+            segundoNumero: false,
           })
         }
       }
@@ -166,6 +187,7 @@ class Calculator extends PureComponent {
     const { numero1 } = this.state
     const { numero2 } = this.state
     const { operador } = this.state
+    const { segundoNumero } = this.state
     if (operacion === '=') {
       if (operador === '+') {
         if ((parseInt(numero1 + numero2, 10)) > 999999999) {
@@ -174,6 +196,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -182,6 +205,7 @@ class Calculator extends PureComponent {
             numero2: 0,
             operador: '',
             igual: true,
+            segundoNumero: false,
           })
         }
       } else if (operador === '-') {
@@ -191,6 +215,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -199,16 +224,26 @@ class Calculator extends PureComponent {
             numero2: 0,
             operador: '',
             igual: true,
+            segundoNumero: false,
           })
         }
       } else if (operador === 'x') {
-        if (numero2 === 0) {
+        if (numero2 === 0 && segundoNumero === true) {
+          this.setState({
+            display: (parseInt(numero1 * numero2, 10)).toString(),
+            numero1: parseInt(numero1 * numero2, 10),
+            numero2: 0,
+            operador: '',
+            segundoNumero: false,
+          })
+        } else if (numero2 === 0) {
           this.setState({
             display: (parseInt(numero1, 10)).toString(),
             numero1: parseInt(numero1, 10),
             numero2: 0,
             operador: '',
             igual: true,
+            segundoNumero: false,
           })
         } else if ((parseInt(numero1 * numero2, 10)) > 999999999) {
           this.setState({
@@ -216,6 +251,7 @@ class Calculator extends PureComponent {
             operador: '',
             numero1: parseInt('0', 10),
             numero2: parseInt('0', 10),
+            segundoNumero: false,
           })
         } else {
           this.setState({
@@ -224,6 +260,7 @@ class Calculator extends PureComponent {
             numero2: 0,
             operador: '',
             igual: true,
+            segundoNumero: false,
           })
         }
       } else {
@@ -233,6 +270,7 @@ class Calculator extends PureComponent {
           numero2: 0,
           operador: '',
           igual: true,
+          segundoNumero: false,
         })
       }
     }
