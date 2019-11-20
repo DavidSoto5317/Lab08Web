@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import '../css/Estilos.css'
 import Display from './Display'
 import Boton from './Boton'
-import BotonDiv from './BotonDiv'
 
 class Calculator extends PureComponent {
   constructor(props) {
@@ -106,11 +105,9 @@ class Calculator extends PureComponent {
         operador: operando,
       })
     } else if (operador === '') {
-      if (operando !== '/') {
-        this.setState({
-          operador: operando,
-        })
-      }
+      this.setState({
+        operador: operando,
+      })
     } else if (operador !== '') {
       if (operador === '+') {
         if ((parseInt(numero1 + numero2, 10)) > 999999999) {
@@ -177,6 +174,58 @@ class Calculator extends PureComponent {
           this.setState({
             display: (parseInt(numero1 * numero2, 10)).toString(),
             numero1: parseInt(numero1 * numero2, 10),
+            numero2: 0,
+            operador: operando,
+            segundoNumero: false,
+          })
+        }
+      } else if (operador === '/') {
+        if (numero2 === 0 && segundoNumero === true) {
+          if ((numero1 / numero2) === NaN) {
+            this.setState({
+              display: 'MATH ERROR',
+              operador: '',
+              numero1: parseInt('0', 10),
+              numero2: parseInt('0', 10),
+              segundoNumero: false,
+            })
+          } else {
+            this.setState({
+              display: (parseFloat(numero1 / numero2, 10)).toString().substr(0, 8),
+              numero1: parseFloat(numero1 / numero2, 10),
+              numero2: 0,
+              operador: operando,
+              segundoNumero: false,
+            })
+          }
+        } else if (numero2 === 0) {
+          this.setState({
+            display: (parseFloat(numero1, 10)).toString(),
+            numero1: parseFloat(numero1, 10),
+            numero2: 0,
+            operador: operando,
+            segundoNumero: false,
+          })
+        } else if ((parseInt(numero1 / numero2, 10)) > 999999999) {
+          this.setState({
+            display: 'MATH ERROR',
+            operador: '',
+            numero1: parseInt('0', 10),
+            numero2: parseInt('0', 10),
+            segundoNumero: false,
+          })
+        } else if ((numero1 / numero2) === NaN) {
+          this.setState({
+            display: 'MATH ERROR',
+            operador: '',
+            numero1: parseInt('0', 10),
+            numero2: parseInt('0', 10),
+            segundoNumero: false,
+          })
+        } else {
+          this.setState({
+            display: (parseInt(numero1 / numero2, 10)).toString().substr(0, 8),
+            numero1: parseInt(numero1 / numero2, 10),
             numero2: 0,
             operador: operando,
             segundoNumero: false,
@@ -266,6 +315,60 @@ class Calculator extends PureComponent {
             segundoNumero: false,
           })
         }
+      } else if (operador === '/') {
+        if (numero2 === 0 && segundoNumero === true) {
+          if ((numero1 / numero2) === NaN) {
+            this.setState({
+              display: 'MATH ERROR',
+              operador: '',
+              numero1: parseInt('0', 10),
+              numero2: parseInt('0', 10),
+              segundoNumero: false,
+            })
+          } else {
+            this.setState({
+              display: (parseFloat(numero1 / numero2, 10)).toString().substr(0, 8),
+              numero1: parseFloat(numero1 / numero2, 10),
+              numero2: 0,
+              operador: '',
+              segundoNumero: false,
+            })
+          }
+        } else if (numero2 === 0) {
+          this.setState({
+            display: (parseInt(numero1, 10)).toString(),
+            numero1: parseInt(numero1, 10),
+            numero2: 0,
+            operador: '',
+            igual: true,
+            segundoNumero: false,
+          })
+        } else if ((parseFloat(numero1 / numero2, 10)) > 999999999) {
+          this.setState({
+            display: 'MATH ERROR',
+            operador: '',
+            numero1: parseInt('0', 10),
+            numero2: parseInt('0', 10),
+            segundoNumero: false,
+          })
+        } else if ((numero1 / numero2) === NaN) {
+          this.setState({
+            display: 'MATH ERROR',
+            operador: '',
+            numero1: parseInt('0', 10),
+            numero2: parseInt('0', 10),
+            segundoNumero: false,
+          })
+        } else {
+          this.setState({
+            display: (parseFloat(numero1 / numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 / numero2, 10),
+            numero2: 0,
+            operador: '',
+            igual: true,
+            segundoNumero: false,
+          })
+        }
       } else {
         this.setState({
           display: (parseInt(numero1, 10)).toString(),
@@ -296,7 +399,7 @@ class Calculator extends PureComponent {
           <Boton texto='5' estilo='boton' handle={this.ingresarNumero.bind(this)}> </Boton>
           <Boton texto='6' estilo='boton' handle={this.ingresarNumero.bind(this)}> </Boton>
           <Boton texto='x' estilo='boton' handle={this.ingresarOperando.bind(this)}> </Boton>
-          <BotonDiv texto='/' estilo='botonDiv' handle={this.ingresarOperando.bind(this)}> </BotonDiv>
+          <Boton texto='/' estilo='boton' handle={this.ingresarOperando.bind(this)}> </Boton>
           <Boton texto='1' estilo='boton' handle={this.ingresarNumero.bind(this)}> </Boton>
           <Boton texto='2' estilo='boton' handle={this.ingresarNumero.bind(this)}> </Boton>
           <Boton texto='3' estilo='boton' handle={this.ingresarNumero.bind(this)}> </Boton>
