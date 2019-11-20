@@ -120,8 +120,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 + numero2, 10)).toString(),
-            numero1: parseInt(numero1 + numero2, 10),
+            display: (parseFloat(numero1 + numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 + numero2, 10),
             numero2: 0,
             operador: operando,
             segundoNumero: false,
@@ -138,8 +138,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 - numero2, 10)).toString(),
-            numero1: parseInt(numero1 - numero2, 10),
+            display: (parseFloat(numero1 - numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 - numero2, 10),
             numero2: 0,
             operador: operando,
             segundoNumero: false,
@@ -148,7 +148,7 @@ class Calculator extends PureComponent {
       } else if (operador === 'x') {
         if (numero2 === 0 && segundoNumero === true) {
           this.setState({
-            display: (parseInt(numero1 * numero2, 10)).toString(),
+            display: (parseFloat(numero1 * numero2, 10)).toString().substr(0, 8),
             numero1: parseInt(numero1 * numero2, 10),
             numero2: 0,
             operador: operando,
@@ -172,8 +172,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 * numero2, 10)).toString(),
-            numero1: parseInt(numero1 * numero2, 10),
+            display: (parseFloat(numero1 * numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 * numero2, 10),
             numero2: 0,
             operador: operando,
             segundoNumero: false,
@@ -181,7 +181,7 @@ class Calculator extends PureComponent {
         }
       } else if (operador === '/') {
         if (numero2 === 0 && segundoNumero === true) {
-          if ((numero1 / numero2) === NaN) {
+          if ((numero1 / numero2) === Infinity) {
             this.setState({
               display: 'MATH ERROR',
               operador: '',
@@ -214,7 +214,7 @@ class Calculator extends PureComponent {
             numero2: parseInt('0', 10),
             segundoNumero: false,
           })
-        } else if ((numero1 / numero2) === NaN) {
+        } else if ((numero1 / numero2) === Infinity) {
           this.setState({
             display: 'MATH ERROR',
             operador: '',
@@ -224,8 +224,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 / numero2, 10)).toString().substr(0, 8),
-            numero1: parseInt(numero1 / numero2, 10),
+            display: (parseFloat(numero1 / numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 / numero2, 10),
             numero2: 0,
             operador: operando,
             segundoNumero: false,
@@ -252,8 +252,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 + numero2, 10)).toString(),
-            numero1: parseInt(numero1 + numero2, 10),
+            display: (parseFloat(numero1 + numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 + numero2, 10),
             numero2: 0,
             operador: '',
             igual: true,
@@ -271,8 +271,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 - numero2, 10)).toString(),
-            numero1: parseInt(numero1 - numero2, 10),
+            display: (parseFloat(numero1 - numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 - numero2, 10),
             numero2: 0,
             operador: '',
             igual: true,
@@ -282,8 +282,8 @@ class Calculator extends PureComponent {
       } else if (operador === 'x') {
         if (numero2 === 0 && segundoNumero === true) {
           this.setState({
-            display: (parseInt(numero1 * numero2, 10)).toString(),
-            numero1: parseInt(numero1 * numero2, 10),
+            display: (parseFloat(numero1 * numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 * numero2, 10),
             numero2: 0,
             operador: '',
             segundoNumero: false,
@@ -307,8 +307,8 @@ class Calculator extends PureComponent {
           })
         } else {
           this.setState({
-            display: (parseInt(numero1 * numero2, 10)).toString(),
-            numero1: parseInt(numero1 * numero2, 10),
+            display: (parseFloat(numero1 * numero2, 10)).toString().substr(0, 8),
+            numero1: parseFloat(numero1 * numero2, 10),
             numero2: 0,
             operador: '',
             igual: true,
@@ -317,7 +317,7 @@ class Calculator extends PureComponent {
         }
       } else if (operador === '/') {
         if (numero2 === 0 && segundoNumero === true) {
-          if ((numero1 / numero2) === NaN) {
+          if ((numero1 / numero2) === Infinity) {
             this.setState({
               display: 'MATH ERROR',
               operador: '',
@@ -351,7 +351,7 @@ class Calculator extends PureComponent {
             numero2: parseInt('0', 10),
             segundoNumero: false,
           })
-        } else if ((numero1 / numero2) === NaN) {
+        } else if ((numero1 / numero2) === Infinity) {
           this.setState({
             display: 'MATH ERROR',
             operador: '',
